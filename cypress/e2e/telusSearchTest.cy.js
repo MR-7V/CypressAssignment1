@@ -31,44 +31,23 @@ describe("Test search functionality", () => {
           });
       });
 
-    //check at least there are 6 articles with click able links
-    cy.get(
-      ":nth-child(2) > .styles__ResultInnerContainer-sc-1aohvhp-4 > .styles__ListContainer-sc-1aohvhp-6 > li"
-    )
-      .should("have.length.at.least", 6)
-      .each(($li) => {
-        // Check that each li contains an anchor tag with an href attribute
-        cy.wrap($li).find("a").should("have.attr", "href");
-      });
+    // Array of selectors for the different sections (articals, forums, related info, blogs)
+    const sections = [
+      ":nth-child(2) > .styles__ResultInnerContainer-sc-1aohvhp-4 > .styles__ListContainer-sc-1aohvhp-6 > li",
+      ":nth-child(3) > .styles__ResultInnerContainer-sc-1aohvhp-4 > .styles__ListContainer-sc-1aohvhp-6 >li",
+      ":nth-child(6) > .styles__ResultInnerContainer-sc-1aohvhp-4 > .styles__ListContainer-sc-1aohvhp-6 >li",
+      ":nth-child(8) > .styles__ResultInnerContainer-sc-1aohvhp-4 > .styles__ListContainer-sc-1aohvhp-6 >li",
+    ];
 
-    //check at least there are 6 formus with click able links
-    cy.get(
-      ":nth-child(3) > .styles__ResultInnerContainer-sc-1aohvhp-4 > .styles__ListContainer-sc-1aohvhp-6 >li"
-    )
-      .should("have.length.at.least", 6)
-      .each(($li) => {
-        // Check that each li contains an anchor tag with an href attribute
-        cy.wrap($li).find("a").should("have.attr", "href");
-      });
-
-    //check at least there are 6 related info with click able links
-    cy.get(
-      ":nth-child(6) > .styles__ResultInnerContainer-sc-1aohvhp-4 > .styles__ListContainer-sc-1aohvhp-6 >li"
-    )
-      .should("have.length.at.least", 6)
-      .each(($li) => {
-        // Check that each li contains an anchor tag with an href attribute
-        cy.wrap($li).find("a").should("have.attr", "href");
-      });
-
-    //check at least there are 6 blogs with click able links
-    cy.get(
-      ":nth-child(8) > .styles__ResultInnerContainer-sc-1aohvhp-4 > .styles__ListContainer-sc-1aohvhp-6 >li"
-    )
-      .should("have.length.at.least", 6)
-      .each(($li) => {
-        // Check that each li contains an anchor tag with an href attribute
-        cy.wrap($li).find("a").should("have.attr", "href");
-      });
+    // Iterate over each section
+    sections.forEach((section) => {
+      // Check at least there are 6 items with clickable links in the section
+      cy.get(section)
+        .should("have.length.at.least", 6)
+        .each(($li) => {
+          // Check that each li contains an anchor tag with an href attribute
+          cy.wrap($li).find("a").should("have.attr", "href");
+        });
+    });
   });
 });
